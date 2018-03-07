@@ -1,7 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="13771"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -673,7 +676,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="AdaptiveKiosk" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -688,7 +691,37 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-			<connections>
+                        <toolbar key="toolbar" implicitIdentifier="02529140-9473-42F5-A34E-17E0B0BD9A00" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="regular" id="jos-we-8DH">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="513B8892-47C8-4075-A964-83F2F0FE42BA" label="Settings" paletteLabel="Settings" tag="-1" image="NSPreferencesGeneral" id="SYR-mX-yYY">
+                                    <connections>
+                                        <segue destination="ISZ-k7-kBz" kind="sheet" id="Aj5-RM-O83"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="C8D48FAC-3C00-47BD-A41B-F634B207E446" label="S" paletteLabel="S" id="BXC-B7-3q7">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="38" height="17"/>
+                                    <size key="maxSize" width="317" height="17"/>
+                                    <textField key="view" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="kdB-86-hcD">
+                                        <rect key="frame" x="0.0" y="14" width="211" height="17"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="•   The Adaptive Web   •" id="3zP-hZ-1Xd">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="xCF-DI-2Xb"/>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="SYR-mX-yYY"/>
+                                <toolbarItem reference="xCF-DI-2Xb"/>
+                                <toolbarItem reference="BXC-B7-3q7"/>
+                                <toolbarItem reference="xCF-DI-2Xb"/>
+                            </defaultToolbarItems>
+                        </toolbar>
+                        <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
                         </connections>
                     </window>
@@ -700,18 +733,86 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
+        <!--Style View Controller-->
+        <scene sceneID="8dC-D2-vzR">
+            <objects>
+                <viewController id="ISZ-k7-kBz" customClass="StyleViewController" customModule="AdaptiveKiosk" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="2G5-oT-Yb9">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5tt-RY-LD7">
+                                <rect key="frame" x="0.0" y="60" width="450" height="240"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EFX-K7-EXl">
+                                <rect key="frame" x="365" y="13" width="71" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Vzo-E8-JAP"/>
+                                    <constraint firstAttribute="width" constant="59" id="f7h-ZO-7qK"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EPn-cC-I0q">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="dismissController:" target="ISZ-k7-kBz" id="dCy-TZ-sl5"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="EFX-K7-EXl" secondAttribute="bottom" constant="20" id="4tb-AY-700"/>
+                            <constraint firstItem="5tt-RY-LD7" firstAttribute="top" secondItem="2G5-oT-Yb9" secondAttribute="top" id="5t4-YB-yQu"/>
+                            <constraint firstAttribute="trailing" secondItem="5tt-RY-LD7" secondAttribute="trailing" id="6ea-II-VVe"/>
+                            <constraint firstItem="EFX-K7-EXl" firstAttribute="top" secondItem="5tt-RY-LD7" secondAttribute="bottom" constant="20" id="RJ5-Yh-pKV"/>
+                            <constraint firstItem="5tt-RY-LD7" firstAttribute="leading" secondItem="2G5-oT-Yb9" secondAttribute="leading" id="nIm-k8-axy"/>
+                            <constraint firstAttribute="trailing" secondItem="EFX-K7-EXl" secondAttribute="trailing" constant="20" id="qA1-uE-Y4v"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mainStylePage" destination="5tt-RY-LD7" id="c6t-Od-e2g"/>
+                    </connections>
+                </viewController>
+                <customObject id="8WZ-3h-EgU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="729" y="407"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="AdaptiveKiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7MW-AA-5Tr">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="7MW-AA-5Tr" secondAttribute="trailing" id="7yR-UO-HH4"/>
+                            <constraint firstItem="7MW-AA-5Tr" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="Zwo-yg-sGy"/>
+                            <constraint firstItem="7MW-AA-5Tr" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="ecW-wc-BmE"/>
+                            <constraint firstAttribute="bottom" secondItem="7MW-AA-5Tr" secondAttribute="bottom" id="etM-1l-RNf"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mainSiteView" destination="7MW-AA-5Tr" id="FBe-Um-Us4"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="655"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NSPreferencesGeneral" width="32" height="32"/>
+    </resources>
 </document>
